@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="BasicBot_jar">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/out/artifacts/BasicBot_jar/BasicBot.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/BasicBot_jar/BasicBot.jar.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

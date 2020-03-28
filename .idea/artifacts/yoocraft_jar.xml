@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="yoocraft:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/yoocraft_jar</output-path>
+    <root id="archive" name="yoocraft.jar">
+      <element id="module-output" name="yoocraft" />
+      <element id="library" level="project" name="BasicBot_jar" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/bwmirror_v2_5.jar" path-in-jar="/" />
+      <element id="library" level="project" name="bwmirror_v2_5" />
+    </root>
+  </artifact>
+</component>
