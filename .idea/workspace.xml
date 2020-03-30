@@ -28,11 +28,16 @@
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15458937" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Java" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="yoocraft" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="Main" />
+      <option name="MAIN_CLASS_NAME" value="yoocraft.Main" />
       <module name="yoocraft" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -98,10 +103,10 @@
       <screen x="0" y="0" width="1920" height="1200" />
     </state>
     <state x="610" y="278" key="NewModule_or_Project.wizard/0.0.1920.1200@0.0.1920.1200" timestamp="1585413423311" />
-    <state x="469" y="239" key="SettingsEditor" timestamp="1585413731877">
+    <state x="469" y="239" key="SettingsEditor" timestamp="1585572284001">
       <screen x="0" y="0" width="1920" height="1200" />
     </state>
-    <state x="469" y="239" key="SettingsEditor/0.0.1920.1200@0.0.1920.1200" timestamp="1585413731877" />
+    <state x="469" y="239" key="SettingsEditor/0.0.1920.1200@0.0.1920.1200" timestamp="1585572284001" />
     <state x="616" y="341" width="687" height="518" key="find.popup" timestamp="1585413542433">
       <screen x="0" y="0" width="1920" height="1200" />
     </state>

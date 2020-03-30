@@ -1,7 +1,5 @@
-import java.util.Set;
+package yoocraft;
 
-import bwapi.Color;
-import bwapi.Position;
 import bwapi.TilePosition;
 import bwapi.Unit;
 import bwapi.UnitType;

@@ -1,4 +1,5 @@
-import bwapi.Color;
+package yoocraft;
+
 import bwapi.Position;
 import bwapi.Unit;
 import bwapi.UnitCommand;

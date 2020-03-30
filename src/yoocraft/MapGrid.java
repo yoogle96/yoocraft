@@ -1,9 +1,9 @@
+package yoocraft;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 import bwapi.Position;
-import bwapi.TilePosition;
 import bwapi.Unit;
 import bwapi.UnitType;
 import bwapi.Unitset;

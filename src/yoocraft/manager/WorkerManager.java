@@ -1,3 +1,5 @@
+package yoocraft.manager;
+
 import bwapi.Color;
 import bwapi.Position;
 import bwapi.Race;
@@ -5,6 +7,13 @@ import bwapi.TilePosition;
 import bwapi.Unit;
 import bwapi.UnitType;
 import bwta.BWTA;
+
+import yoocraft.CommandUtil;
+import yoocraft.Config;
+import yoocraft.MyBotModule;
+import yoocraft.WorkerData;
+import yoocraft.WorkerMoveData;
+
 
 /// 일꾼 유닛들의 상태를 관리하고 컨트롤하는 class
 public class WorkerManager {

@@ -1,3 +1,5 @@
+package yoocraft;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -11,6 +13,7 @@ import bwta.BWTA;
 import bwta.BaseLocation;
 import bwta.Chokepoint;
 import bwta.Region;
+import yoocraft.manager.InformationManager;
 
 /// 건설위치 탐색을 위한 class
 public class ConstructionPlaceFinder {

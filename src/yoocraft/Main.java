@@ -1,3 +1,5 @@
+package yoocraft;
+
 public class Main {
 
 	/// 봇 프로그램을 실행합니다<br>

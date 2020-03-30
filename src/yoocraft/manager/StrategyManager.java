@@ -1,3 +1,5 @@
+package yoocraft.manager;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -5,13 +7,18 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 import bwapi.Race;
-import bwapi.TechType;
 import bwapi.Unit;
 import bwapi.UnitType;
-import bwapi.UpgradeType;
 import bwta.BWTA;
 import bwta.BaseLocation;
 import bwta.Chokepoint;
+
+import yoocraft.BuildOrderItem;
+import yoocraft.CommandUtil;
+import yoocraft.Common;
+import yoocraft.MetaType;
+import yoocraft.MyBotModule;
+
 
 /// 상황을 판단하여, 정찰, 빌드, 공격, 방어 등을 수행하도록 총괄 지휘를 하는 class <br>
 /// InformationManager 에 있는 정보들로부터 상황을 판단하고, <br>

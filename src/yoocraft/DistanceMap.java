@@ -1,3 +1,5 @@
+package yoocraft;
+
 import java.util.Vector;
 
 import bwapi.Position;

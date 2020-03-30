@@ -1,3 +1,5 @@
+package yoocraft;
+
 import bwapi.Player;
 import bwapi.Position;
 import bwapi.Unit;

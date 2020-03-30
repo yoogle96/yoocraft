@@ -1,13 +1,11 @@
+package yoocraft;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
 import bwapi.Position;
 import bwapi.TilePosition;
-import bwapi.Unit;
-import bwapi.UnitType;
-import bwapi.Unitset;
-import bwta.BWTA;
 
 /// provides useful tools for analyzing the starcraft map<br>
 /// calculates connectivity and distances using flood fills

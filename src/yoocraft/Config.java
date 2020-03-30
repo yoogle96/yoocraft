@@ -1,3 +1,5 @@
+package yoocraft;
+
 import java.util.Set;
 
 import bwapi.Color;

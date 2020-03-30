@@ -1,4 +1,4 @@
-/*
+package yoocraft;/*
 +----------------------------------------------------------------------+
 | BasicBot                                                             |
 +----------------------------------------------------------------------+
@@ -26,7 +26,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import bwapi.Color;
 import bwapi.DefaultBWListener;
 import bwapi.Game;
 import bwapi.Mirror;
@@ -36,6 +35,7 @@ import bwapi.Unit;
 import bwapi.UnitType;
 import bwapi.Flag.Enum;
 import bwta.BWTA;
+import yoocraft.manager.UXManager;
 
 
 // BasicBot 1.1 Patch Start ////////////////////////////////////////////////

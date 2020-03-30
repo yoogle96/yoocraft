@@ -1,14 +1,19 @@
+package yoocraft.manager;
+
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Vector;
 
-import bwapi.Position;
-import bwapi.Race;
-import bwapi.TilePosition;
-import bwapi.Unit;
-import bwapi.UnitType;
+import bwapi.*;
 import bwta.BWTA;
 import bwta.Region;
+
+import yoocraft.CommandUtil;
+import yoocraft.ConstructionPlaceFinder;
+import yoocraft.ConstructionTask;
+import yoocraft.MyBotModule;
+
+
 
 /// 건물 건설 Construction 명령 목록을 리스트로 관리하고, 건물 건설 명령이 잘 수행되도록 컨트롤하는 class
 public class ConstructionManager {

@@ -1,3 +1,5 @@
+package yoocraft.manager;
+
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.HashSet;
@@ -20,6 +22,15 @@ import bwta.BaseLocation;
 import bwta.Chokepoint;
 import bwta.Polygon;
 import bwta.Region;
+import yoocraft.BuildOrderItem;
+import yoocraft.Config;
+import yoocraft.ConstructionPlaceFinder;
+import yoocraft.ConstructionTask;
+import yoocraft.MapGrid;
+import yoocraft.MyBotModule;
+import yoocraft.UnitInfo;
+import yoocraft.WorkerData;
+
 
 /// 봇 프로그램 개발의 편의성 향상을 위해 게임 화면에 추가 정보들을 표시하는 class<br>
 /// 여러 Manager 들로부터 정보를 조회하여 Screen 혹은 Map 에 정보를 표시합니다
@@ -132,7 +143,7 @@ public class UXManager {
 		if (Config.DrawMouseCursorInfo) {
 			int mouseX = MyBotModule.Broodwar.getMousePosition().getX() + MyBotModule.Broodwar.getScreenPosition().getX();
 			int mouseY = MyBotModule.Broodwar.getMousePosition().getY() + MyBotModule.Broodwar.getScreenPosition().getY();
-			MyBotModule.Broodwar.drawTextMap(mouseX + 20, mouseY, "(" + (int)(mouseX/Config.TILE_SIZE) + ", " +  (int)(mouseY/Config.TILE_SIZE) + ")");
+			MyBotModule.Broodwar.drawTextMap(mouseX + 20, mouseY, "(" + (int)(mouseX/ Config.TILE_SIZE) + ", " +  (int)(mouseY/ Config.TILE_SIZE) + ")");
 		}
 
 	}
@@ -140,7 +151,7 @@ public class UXManager {
 	// 게임 개요 정보를 Screen 에 표시합니다
 	public void drawGameInformationOnScreen(int x, int y) {
 		MyBotModule.Broodwar.drawTextScreen(x, y, white + "Players : ");
-		MyBotModule.Broodwar.drawTextScreen(x + 50, y, MyBotModule.Broodwar.self().getTextColor() + MyBotModule.Broodwar.self().getName() + "(" + InformationManager.Instance().selfRace + ") " + white + " vs.  " + 
+		MyBotModule.Broodwar.drawTextScreen(x + 50, y, MyBotModule.Broodwar.self().getTextColor() + MyBotModule.Broodwar.self().getName() + "(" + InformationManager.Instance().selfRace + ") " + white + " vs.  " +
 				InformationManager.Instance().enemyPlayer.getTextColor() + InformationManager.Instance().enemyPlayer.getName() + "(" + InformationManager.Instance().enemyRace + ")");
 		y += 12;
 
@@ -886,7 +897,7 @@ public class UXManager {
 
 	/// Worker Unit 들의 상태를 Screen 에 표시합니다
 	public void drawWorkerStateOnScreen(int x, int y) {
-		WorkerData  workerData = WorkerManager.Instance().getWorkerData();
+		WorkerData workerData = WorkerManager.Instance().getWorkerData();
 
 		MyBotModule.Broodwar.drawTextScreen(x, y, white + "<Workers : " + workerData.getNumMineralWorkers() + ">");
 
@@ -928,7 +939,7 @@ public class UXManager {
 
 	/// Worker Unit 의 자원채취 현황을 Map 에 표시합니다
 	public void drawWorkerMiningStatusOnMap() {
-		WorkerData  workerData = WorkerManager.Instance().getWorkerData();
+		WorkerData workerData = WorkerManager.Instance().getWorkerData();
 
 		for (Unit worker : workerData.getWorkers())
 		{

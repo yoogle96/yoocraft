@@ -1,3 +1,5 @@
+package yoocraft.manager;
+
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Vector;
@@ -9,6 +11,11 @@ import bwapi.Unit;
 import bwta.BWTA;
 import bwta.BaseLocation;
 import bwta.Region;
+
+import yoocraft.CommandUtil;
+import yoocraft.Config;
+import yoocraft.MapTools;
+import yoocraft.MyBotModule;
 
 /// 게임 초반에 일꾼 유닛 중에서 정찰 유닛을 하나 지정하고, 정찰 유닛을 이동시켜 정찰을 수행하는 class<br>
 /// 적군의 BaseLocation 위치를 알아내는 것까지만 개발되어있습니다
@@ -115,7 +122,7 @@ public class ScoutManager {
 		{
 			// currentScoutTargetBaseLocation 가 null 이거나 정찰 유닛이 currentScoutTargetBaseLocation 에 도착했으면 
 			// 아군 MainBaseLocation 으로부터 가장 가까운 미정찰 BaseLocation 을 새로운 정찰 대상 currentScoutTargetBaseLocation 으로 잡아서 이동
-			if (currentScoutTargetBaseLocation == null || currentScoutUnit.getDistance(currentScoutTargetBaseLocation.getPosition()) < 5 * Config.TILE_SIZE) 
+			if (currentScoutTargetBaseLocation == null || currentScoutUnit.getDistance(currentScoutTargetBaseLocation.getPosition()) < 5 * Config.TILE_SIZE)
 			{
 				currentScoutStatus = ScoutStatus.MovingToAnotherBaseLocation.ordinal();
 

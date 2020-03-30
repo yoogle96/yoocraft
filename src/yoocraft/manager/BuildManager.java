@@ -1,3 +1,5 @@
+package yoocraft.manager;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -17,6 +19,13 @@ import bwta.BWTA;
 import bwta.BaseLocation;
 import bwta.Chokepoint;
 import bwta.Region;
+
+import yoocraft.BuildOrderItem;
+import yoocraft.BuildOrderQueue;
+import yoocraft.Config;
+import yoocraft.ConstructionPlaceFinder;
+import yoocraft.MetaType;
+import yoocraft.MyBotModule;
 
 /// 빌드(건물 건설 / 유닛 훈련 / 테크 리서치 / 업그레이드) 명령을 순차적으로 실행하기 위해 빌드 큐를 관리하고, 빌드 큐에 있는 명령을 하나씩 실행하는 class<br>
 /// 빌드 명령 중 건물 건설 명령은 ConstructionManager로 전달합니다
@@ -698,7 +707,7 @@ public class BuildManager {
 				
 				//std::cout << "k";
 				// 해당 지점이 같은 Region 에 속하고 Buildable 한 타일인지 확인
-				if (!tempTilePosition.isValid() || !MyBotModule.Broodwar.isBuildable(tempTilePosition.getX(), tempTilePosition.getY(), false) || tempBaseRegion != BWTA.getRegion(new Position(bx*Config.TILE_SIZE, by*Config.TILE_SIZE))) {
+				if (!tempTilePosition.isValid() || !MyBotModule.Broodwar.isBuildable(tempTilePosition.getX(), tempTilePosition.getY(), false) || tempBaseRegion != BWTA.getRegion(new Position(bx* Config.TILE_SIZE, by* Config.TILE_SIZE))) {
 					//std::cout << "l";
 	
 					// BaseLocation 에서 ChokePoint 방향에 대해 오른쪽으로 90도 꺾은 방향의 Back Yard : 데카르트 좌표계에서 (cos(t-90) = sin(t),   sin(t-90) = - cos(t))
@@ -715,7 +724,7 @@ public class BuildManager {
 						tempTilePosition = new TilePosition(bx, by);
 						// std::cout << "ConstructionPlaceFinder MainBaseBackYard tempTilePosition " << tempTilePosition.x << "," << tempTilePosition.y << std::endl;
 	
-						if (!tempTilePosition.isValid() || !MyBotModule.Broodwar.isBuildable(tempTilePosition.getX(), tempTilePosition.getY(), false) || tempBaseRegion != BWTA.getRegion(new Position(bx*Config.TILE_SIZE, by*Config.TILE_SIZE))) {
+						if (!tempTilePosition.isValid() || !MyBotModule.Broodwar.isBuildable(tempTilePosition.getX(), tempTilePosition.getY(), false) || tempBaseRegion != BWTA.getRegion(new Position(bx* Config.TILE_SIZE, by* Config.TILE_SIZE))) {
 	
 							// BaseLocation 에서 ChokePoint 방향 절반 지점의 Back Yard : 데카르트 좌표계에서 (cos(t),   sin(t))
 							bx = tempBaseLocation.getTilePosition().getX() + (int)(d * Math.cos(theta) / Config.TILE_SIZE);

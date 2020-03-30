@@ -1,10 +1,7 @@
-import java.lang.reflect.Field;
-import java.util.Set;
+package yoocraft;
 
-import bwapi.Color;
 import bwapi.Race;
 import bwapi.TechType;
-import bwapi.TilePosition;
 import bwapi.UnitType;
 import bwapi.UpgradeType;
 
