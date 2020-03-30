@@ -258,25 +258,25 @@ public class MapGrid {
 		}
 	}
 
-	int	getCellSize()
+	public int	getCellSize()
 	{
 		return cellSize;
 	}
 
-	int getMapWidth(){
+	public int getMapWidth(){
 		return mapWidth;
 	}
 
-	int getMapHeight(){
+	public int getMapHeight(){
 		return mapHeight;
 	}
 
-	int getRows()
+	public int getRows()
 	{
 		return rows;
 	}
 
-	int getCols()
+	public int getCols()
 	{
 		return cols;
 	}
