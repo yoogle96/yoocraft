@@ -1,5 +1,6 @@
 package yoocraft;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -29,6 +30,8 @@ public class UnitData {
 	/// C++ 에서는 UnitType 의 열거형 값을 Key 로 사용하지만, <br>
 	/// JAVA 에서는 UnitType 의 열거형 값이 부재하므로 Unit.getType() 값을 Key 로 사용함
 	Map<String,Integer> numUnits = new HashMap<String,Integer>();
+
+	Map<UnitType, ArrayList<UnitInfo>> buildingUnitMap = new HashMap<>();
 	
 	/// 사망한 유닛을 생산하는데 소요되었던 Mineral 의 누적값 (얼마나 손해를 보았는가 계산하기 위함임)
 	private int mineralsLost = 0;
@@ -75,8 +78,13 @@ public class UnitData {
 		ui.setType(unit.getType());
 		ui.setCompleted(unit.isCompleted());
 		
-		//unitAndUnitInfoMap.put(unit, ui);
-		
+		if(buildingUnitMap.containsKey(ui.getUnit().getType())) {
+			buildingUnitMap.get(ui.getUnit().getType()).add(ui);
+		}else {
+			ArrayList<UnitInfo> unitInfos = new ArrayList<>();
+			unitInfos.add(ui);
+			buildingUnitMap.put(ui.getUnit().getType(), unitInfos);
+		}
 		if (firstSeen)
 		{
 			if(!numCreatedUnits.containsKey(unit.getType().toString())){
@@ -233,5 +241,9 @@ public class UnitData {
 
 	public Map<String, Integer> getNumUnits() {
 		return numUnits;
+	}
+
+	public ArrayList<UnitInfo> getBuildingUnitInfos(UnitType unitType) {
+		return buildingUnitMap.get(unitType);
 	}
 }

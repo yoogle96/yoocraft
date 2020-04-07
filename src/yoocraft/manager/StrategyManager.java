@@ -98,11 +98,8 @@ public class StrategyManager {
 		}
 
 		executeWorkerTraining();
-
 		executeSupplyManagement();
-
 		executeBasicCombatUnitTraining();
-
 		executeCombat();
 
 		// BasicBot 1.1 Patch Start ////////////////////////////////////////////////
