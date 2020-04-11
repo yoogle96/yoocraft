@@ -6,4 +6,9 @@ public class VSZerg implements VSRace{
     public void initBuild() {
 
     }
+
+    @Override
+    public void update() {
+
+    }
 }

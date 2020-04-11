@@ -9,4 +9,8 @@ public class VSProtoss implements VSRace{
     public void initBuild() {
         oneFacDouble.initBuild();
     }
+
+    @Override
+    public void update() {
+    }
 }
