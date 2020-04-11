@@ -4,6 +4,7 @@ import bwapi.TilePosition;
 import bwapi.UnitType;
 import yoocraft.BuildOrderItem;
 import yoocraft.ConstructionPlaceFinder;
+import yoocraft.MyBotModule;
 import yoocraft.manager.BuildManager;
 import yoocraft.manager.InformationManager;
 
@@ -14,29 +15,16 @@ public class OneFacDouble implements BuildOrder{
     @Override
     public void initBuild() {
         System.out.println("원팩 더블 설정");
-//
-//        BuildManager.Instance().buildQueue.queueAsLowestPriority(
-//                InformationManager.Instance().getBasicSupplyProviderUnitType(),
-//                BuildOrderItem.SeedPositionStrategy.MainBaseLocation, true);
-//
-//        BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Barracks,
-//                BuildOrderItem.SeedPositionStrategy.MainBaseLocation, true);
-//
-//        BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Barracks,
-//                BuildOrderItem.SeedPositionStrategy.MainBaseLocation, true);
-//
-//        BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Barracks,
-//                BuildOrderItem.SeedPositionStrategy.MainBaseLocation, true);
-//
-//        BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Barracks,
-//                BuildOrderItem.SeedPositionStrategy.MainBaseLocation, true);
-//
-//        BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Barracks,
-//                BuildOrderItem.SeedPositionStrategy.MainBaseLocation, true);
     }
 
     @Override
     public void update() {
+
+        // 12프레임에 한번씩 실행
+        if(MyBotModule.Broodwar.getFrameCount() % 12 != 0) {
+            return;
+        }
+
         if(buildUtil.canBuild(UnitType.Terran_Barracks, 22)) {
             BuildManager.Instance().buildQueue.queueAsHighestPriority(UnitType.Terran_Barracks, false);
         };

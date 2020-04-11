@@ -1,5 +1,6 @@
 package yoocraft.strategy;
 
+import yoocraft.MyBotModule;
 import yoocraft.strategy.build.OneFacDouble;
 
 public class VSProtoss implements VSRace{
@@ -7,10 +8,13 @@ public class VSProtoss implements VSRace{
 
     @Override
     public void initBuild() {
+        MyBotModule.Broodwar.printf("VSProtoss Init");
+        System.out.println("VSProtoss Init");
         oneFacDouble.initBuild();
     }
 
     @Override
     public void update() {
+        oneFacDouble.update();
     }
 }

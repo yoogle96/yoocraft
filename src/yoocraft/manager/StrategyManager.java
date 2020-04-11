@@ -105,6 +105,8 @@ public class StrategyManager {
 		executeBasicCombatUnitTraining();
 		executeCombat();
 
+		vsRace.update();
+
 		// BasicBot 1.1 Patch Start ////////////////////////////////////////////////
 		// 경기 결과 파일 Save / Load 및 로그파일 Save 예제 추가
 
@@ -117,17 +119,14 @@ public class StrategyManager {
 	public void setInitialBuildOrder() {
 		if(InformationManager.Instance().enemyRace == Race.Protoss) {
 			vsRace = new VSProtoss();
-			System.out.println("상대  : 프로토스");
-			vsRace.initBuild();
 		}else if(InformationManager.Instance().enemyRace == Race.Terran) {
 			vsRace = new VSTerran();
-			System.out.println("상대 : 테란");
 		}else if(InformationManager.Instance().enemyRace == Race.Zerg) {
 			vsRace = new VSZerg();
-			System.out.println("상대 : 저그");
 		}else {
-			System.out.println("상대 : 랜덤");
+			vsRace = new VSProtoss();
 		}
+		vsRace.initBuild();
 
 //		else if (MyBotModule.Broodwar.self().getRace() == Race.Terran) {
 //			BuildManager.Instance().buildQueue.queueAsLowestPriority(InformationManager.Instance().getWorkerType(),

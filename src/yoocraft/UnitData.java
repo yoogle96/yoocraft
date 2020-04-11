@@ -244,6 +244,10 @@ public class UnitData {
 	}
 
 	public ArrayList<UnitInfo> getBuildingUnitInfos(UnitType unitType) {
-		return buildingUnitMap.get(unitType);
+		if(buildingUnitMap.containsKey(unitType)) {
+			return buildingUnitMap.get(unitType);
+		}else {
+			return null;
+		}
 	}
 }
