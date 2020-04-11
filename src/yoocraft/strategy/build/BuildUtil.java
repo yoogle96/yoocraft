@@ -3,6 +3,7 @@ package yoocraft.strategy.build;
 import bwapi.UnitType;
 import yoocraft.MyBotModule;
 import yoocraft.manager.BuildManager;
+import yoocraft.manager.ConstructionManager;
 import yoocraft.manager.InformationManager;
 
 public class BuildUtil {
@@ -23,7 +24,8 @@ public class BuildUtil {
 
     public boolean isExistOrUnderConstruction(UnitType unitType) {
         if (BuildManager.Instance().buildQueue.getItemCount(unitType) >= 1 ||
-                InformationManager.Instance().getUnitData(MyBotModule.Broodwar.self()).getBuildingUnitInfos(unitType) != null) {
+                InformationManager.Instance().getUnitData(MyBotModule.Broodwar.self()).getBuildingUnitInfos(unitType) != null ||
+                ConstructionManager.Instance().getConstructionQueueItemCount(unitType, null) >= 1) {
             return true;
         }else {
             return false;

@@ -30,10 +30,10 @@ public class OneFacDouble implements BuildOrder{
         };
 
         if(buildUtil.canBuild(UnitType.Terran_Refinery, 24)) {
-            TilePosition refineryPostiion = ConstructionPlaceFinder.Instance().getRefineryPositionNear(BuildOrderItem.SeedPositionStrategy.MainBaseLocation);
+            TilePosition refineryPosition = ConstructionPlaceFinder.Instance().getRefineryPositionNear(BuildOrderItem.SeedPositionStrategy.MainBaseLocation);
 
-            if(refineryPostiion.isValid()) {
-                BuildManager.Instance().buildQueue.queueAsHighestPriority(UnitType.Terran_Refinery, refineryPostiion, false);
+            if(refineryPosition.isValid()) {
+                BuildManager.Instance().buildQueue.queueAsHighestPriority(UnitType.Terran_Refinery, refineryPosition, false);
             }
         }
     }
