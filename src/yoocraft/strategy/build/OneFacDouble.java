@@ -5,8 +5,9 @@ import yoocraft.BuildOrderItem;
 import yoocraft.manager.BuildManager;
 import yoocraft.manager.InformationManager;
 
-public class OneFacDouble {
+public class OneFacDouble implements BuildOrder{
 
+    @Override
     public void initBuild() {
         System.out.println("원팩 더블 설정");
 
@@ -28,5 +29,10 @@ public class OneFacDouble {
 
         BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Barracks,
                 BuildOrderItem.SeedPositionStrategy.MainBaseLocation, true);
+    }
+
+    @Override
+    public void update() {
+
     }
 }
