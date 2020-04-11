@@ -1,4 +1,9 @@
 package yoocraft.strategy;
 
-public class VSZerg {
+public class VSZerg implements VSRace{
+
+    @Override
+    public void initBuild() {
+
+    }
 }

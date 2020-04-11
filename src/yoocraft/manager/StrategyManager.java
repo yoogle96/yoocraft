@@ -19,6 +19,9 @@ import yoocraft.Common;
 import yoocraft.MetaType;
 import yoocraft.MyBotModule;
 import yoocraft.strategy.VSProtoss;
+import yoocraft.strategy.VSRace;
+import yoocraft.strategy.VSTerran;
+import yoocraft.strategy.VSZerg;
 
 
 /// 상황을 판단하여, 정찰, 빌드, 공격, 방어 등을 수행하도록 총괄 지휘를 하는 class <br>
@@ -30,7 +33,7 @@ public class StrategyManager {
 	private static StrategyManager instance = new StrategyManager();
 
 	private CommandUtil commandUtil = new CommandUtil();
-
+	private VSRace vsRace;
 	private boolean isFullScaleAttackStarted;
 	private boolean isInitialBuildOrderFinished;
 		
@@ -113,12 +116,14 @@ public class StrategyManager {
 
 	public void setInitialBuildOrder() {
 		if(InformationManager.Instance().enemyRace == Race.Protoss) {
+			vsRace = new VSProtoss();
 			System.out.println("상대  : 프로토스");
-			VSProtoss vsProtoss = new VSProtoss();
-			vsProtoss.initBuild();
+			vsRace.initBuild();
 		}else if(InformationManager.Instance().enemyRace == Race.Terran) {
+			vsRace = new VSTerran();
 			System.out.println("상대 : 테란");
 		}else if(InformationManager.Instance().enemyRace == Race.Zerg) {
+			vsRace = new VSZerg();
 			System.out.println("상대 : 저그");
 		}else {
 			System.out.println("상대 : 랜덤");
