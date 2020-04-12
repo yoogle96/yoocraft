@@ -78,13 +78,6 @@ public class UnitData {
 		ui.setType(unit.getType());
 		ui.setCompleted(unit.isCompleted());
 		
-		if(buildingUnitMap.containsKey(ui.getUnit().getType())) {
-			buildingUnitMap.get(ui.getUnit().getType()).add(ui);
-		}else {
-			ArrayList<UnitInfo> unitInfos = new ArrayList<>();
-			unitInfos.add(ui);
-			buildingUnitMap.put(ui.getUnit().getType(), unitInfos);
-		}
 		if (firstSeen)
 		{
 			if(!numCreatedUnits.containsKey(unit.getType().toString())){
@@ -97,6 +90,15 @@ public class UnitData {
 			}else{
 				numUnits.put(unit.getType().toString(), numUnits.get(unit.getType().toString()) + 1);
 			}
+
+			if(buildingUnitMap.containsKey(unit.getType())) {
+				buildingUnitMap.get(unit.getType()).add(ui);
+			}else {
+				ArrayList<UnitInfo> unitInfos = new ArrayList<>();
+				unitInfos.add(ui);
+				buildingUnitMap.put(ui.getUnit().getType(), unitInfos);
+			}
+
 			//numCreatedUnits[unit.getType().getID()]++;
 			//numUnits[unit.getType().getID()]++;
 		}
