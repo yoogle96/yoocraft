@@ -52,5 +52,10 @@ public class OneFacDouble extends BuildMaxCount implements BuildOrder {
         if(buildUtil.canExtensionBuild(UnitType.Terran_Command_Center, 40)) {
             BuildManager.Instance().buildQueue.queueAsHighestPriority(UnitType.Terran_Command_Center, BuildOrderItem.SeedPositionStrategy.FirstExpansionLocation, false);
         }
+
+        // 추가 팩토리 건설
+        if(buildUtil.canBuildAddFactory(UnitType.Terran_Factory, maxFactoryCnt)) {
+            BuildManager.Instance().buildQueue.queueAsHighestPriority(UnitType.Terran_Factory, false);
+        }
     }
 }
