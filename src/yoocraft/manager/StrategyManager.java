@@ -68,52 +68,32 @@ public class StrategyManager {
 		isInitialBuildOrderFinished = false;
 	}
 
-	/// 경기가 시작될 때 일회적으로 전략 초기 세팅 관련 로직을 실행합니다
+	/// 경기가 시작될 때 일회적으로 전략 초기 세팅 관련 로직을 실행
 	public void onStart() {
-		
-		// BasicBot 1.1 Patch Start ////////////////////////////////////////////////
-		// 경기 결과 파일 Save / Load 및 로그파일 Save 예제 추가
-		
-		// 과거 게임 기록을 로딩합니다
+		// 과거 게임 기록 로딩
 		loadGameRecordList();
-
-		// BasicBot 1.1 Patch End //////////////////////////////////////////////////
-
+		// 초반 빌드 초기화
 		setInitialBuildOrder();
 	}
 
 	///  경기가 종료될 때 일회적으로 전략 결과 정리 관련 로직을 실행합니다
 	public void onEnd(boolean isWinner) {
-		
-		// BasicBot 1.1 Patch Start ////////////////////////////////////////////////
-		// 경기 결과 파일 Save / Load 및 로그파일 Save 예제 추가
-		
 		// 과거 게임 기록 + 이번 게임 기록을 저장합니다
 		saveGameRecordList(isWinner);
-		
-		// BasicBot 1.1 Patch End //////////////////////////////////////////////////		
 	}
 
-	/// 경기 진행 중 매 프레임마다 경기 전략 관련 로직을 실행합니다
+	/// 경기 진행 중 매 프레임마다 경기 전략 관련 로직을 실행
 	public void update() {
 		if (BuildManager.Instance().buildQueue.isEmpty()) {
 			isInitialBuildOrderFinished = true;
 		}
-
 		executeWorkerTraining();
 		executeSupplyManagement();
 		executeBasicCombatUnitTraining();
 		executeCombat();
-
 		vsRace.update();
-
-		// BasicBot 1.1 Patch Start ////////////////////////////////////////////////
-		// 경기 결과 파일 Save / Load 및 로그파일 Save 예제 추가
-
 		// 이번 게임의 로그를 남깁니다
 		saveGameLog();
-		
-		// BasicBot 1.1 Patch End //////////////////////////////////////////////////
 	}
 
 	public void setInitialBuildOrder() {
