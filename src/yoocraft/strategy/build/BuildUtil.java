@@ -43,6 +43,14 @@ public class BuildUtil {
         return true;
     }
 
+    public boolean hasBuild(UnitType unitType, int hasCnt) {
+        if(InformationManager.Instance().getUnitData(MyBotModule.Broodwar.self()).getNumCreatedUnits(unitType.toString()) >= hasCnt) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     // 빌드오더 큐, 자신의 유닛, 건설중인 건물에서 하나라도 존재하는지 여부
     public boolean isExistOrUnderConstruction(UnitType unitType) {
         if (BuildManager.Instance().buildQueue.getItemCount(unitType) >= 1 ||
