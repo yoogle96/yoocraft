@@ -32,6 +32,7 @@ public class UnitData {
 	Map<String,Integer> numUnits = new HashMap<String,Integer>();
 
 	Map<UnitType, ArrayList<UnitInfo>> buildingUnitMap = new HashMap<>();
+	Map<UnitType, ArrayList<UnitInfo>> unitTypeMap = new HashMap<>();
 	
 	/// 사망한 유닛을 생산하는데 소요되었던 Mineral 의 누적값 (얼마나 손해를 보았는가 계산하기 위함임)
 	private int mineralsLost = 0;
@@ -91,12 +92,22 @@ public class UnitData {
 				numUnits.put(unit.getType().toString(), numUnits.get(unit.getType().toString()) + 1);
 			}
 
-			if(buildingUnitMap.containsKey(unit.getType())) {
-				buildingUnitMap.get(unit.getType()).add(ui);
+			if(unit.getType().isBuilding()) {
+				if(buildingUnitMap.containsKey(unit.getType())) {
+					buildingUnitMap.get(unit.getType()).add(ui);
+				}else {
+					ArrayList<UnitInfo> unitInfos = new ArrayList<>();
+					unitInfos.add(ui);
+					buildingUnitMap.put(ui.getUnit().getType(), unitInfos);
+				}
 			}else {
-				ArrayList<UnitInfo> unitInfos = new ArrayList<>();
-				unitInfos.add(ui);
-				buildingUnitMap.put(ui.getUnit().getType(), unitInfos);
+				if(unitTypeMap.containsKey(unit.getType())) {
+					unitTypeMap.get(unit.getType()).add(ui);
+				}else {
+					ArrayList<UnitInfo> unitInfos = new ArrayList<>();
+					unitInfos.add(ui);
+					unitTypeMap.put(ui.getUnit().getType(), unitInfos);
+				}
 			}
 
 			//numCreatedUnits[unit.getType().getID()]++;
@@ -248,6 +259,14 @@ public class UnitData {
 	public ArrayList<UnitInfo> getBuildingUnitInfos(UnitType unitType) {
 		if(buildingUnitMap.containsKey(unitType)) {
 			return buildingUnitMap.get(unitType);
+		}else {
+			return null;
+		}
+	}
+
+	public ArrayList<UnitInfo> getUnitInfos(UnitType unitType) {
+		if(unitTypeMap.containsKey(unitType)) {
+			return unitTypeMap.get(unitType);
 		}else {
 			return null;
 		}
