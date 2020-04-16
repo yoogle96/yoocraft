@@ -1,5 +1,7 @@
 package yoocraft.manager;
 
+import yoocraft.manager.unit.MarineManager;
+
 public class UnitManager {
 
     private static UnitManager instance = new UnitManager();
@@ -9,6 +11,6 @@ public class UnitManager {
     }
 
     public void update() {
-
+        MarineManager.Instance().update();
     }
 }

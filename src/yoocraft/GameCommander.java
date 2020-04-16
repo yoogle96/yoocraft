@@ -78,6 +78,8 @@ public class GameCommander {
 		if ( isToFindError) System.out.print("h)");
 
 		TrainManager.Instance().update();
+
+		UnitManager.Instance().update();
 	}
 
 	/// 유닛(건물/지상유닛/공중유닛)이 Create 될 때 발생하는 이벤트를 처리합니다
