@@ -17,8 +17,6 @@ public class MarineManager {
     public void update() {
         if (InformationManager.Instance().getUnitData(MyBotModule.Broodwar.self()).getNumCreatedUnits(UnitType.Terran_Marine.toString()) >= 2) {
             for (UnitInfo unitInfo : InformationManager.Instance().getUnitData(MyBotModule.Broodwar.self()).getUnitInfos(UnitType.Terran_Marine)) {
-                MyBotModule.Broodwar.printf(unitInfo.toString());
-
                 if (InformationManager.Instance().getUnitData(MyBotModule.Broodwar.self()).getNumCreatedUnits(UnitType.Terran_Bunker.toString()) == 1) {
                     UnitInfo bunkerInfo = InformationManager.Instance().getUnitData(MyBotModule.Broodwar.self()).getBuildingUnitInfos(UnitType.Terran_Bunker).get(0);
                     unitInfo.getUnit().rightClick(bunkerInfo.getUnit());
