@@ -89,7 +89,6 @@ public class StrategyManager {
 		}
 		executeWorkerTraining();
 		executeSupplyManagement();
-		executeBasicCombatUnitTraining();
 		executeCombat();
 		vsRace.update();
 		// 이번 게임의 로그를 남깁니다
@@ -251,30 +250,6 @@ public class StrategyManager {
 		}
 
 		// BasicBot 1.1 Patch End ////////////////////////////////////////////////		
-	}
-
-	public void executeBasicCombatUnitTraining() {
-
-		// InitialBuildOrder 진행중에는 아무것도 하지 않습니다
-		if (isInitialBuildOrderFinished == false) {
-			return;
-		}
-
-		// 기본 병력 추가 훈련
-		if (MyBotModule.Broodwar.self().minerals() >= 200 && MyBotModule.Broodwar.self().supplyUsed() < 390) {
-			for (Unit unit : MyBotModule.Broodwar.self().getUnits()) {
-				if (unit.getType() == InformationManager.Instance().getBasicCombatBuildingType()) {
-					if (unit.isTraining() == false || unit.getLarva().size() > 0) {
-						if (BuildManager.Instance().buildQueue
-								.getItemCount(InformationManager.Instance().getBasicCombatUnitType(), null) == 0) {
-							BuildManager.Instance().buildQueue.queueAsLowestPriority(
-									InformationManager.Instance().getBasicCombatUnitType(),
-									BuildOrderItem.SeedPositionStrategy.MainBaseLocation, true);
-						}
-					}
-				}
-			}
-		}
 	}
 
 	public void executeCombat() {
