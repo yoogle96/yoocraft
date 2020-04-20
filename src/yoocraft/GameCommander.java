@@ -45,7 +45,7 @@ public class GameCommander {
 		InformationManager.Instance().update();
 
 		if ( isToFindError) System.out.print("b");
-	
+
 		// 각 유닛의 위치를 자체 MapGrid 자료구조에 저장
 		MapGrid.Instance().update();
 
