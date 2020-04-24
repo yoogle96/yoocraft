@@ -126,10 +126,10 @@ public class UXManager {
 			drawWorkerMiningStatusOnMap();
 		}
 
-		// 정찰
-		if (Config.DrawScoutInfo) {
-			drawScoutInformation(220,330);
-		}
+//		// 정찰
+//		if (Config.DrawScoutInfo) {
+//			drawScoutInformation(220,330);
+//		}
 
 		// 공격
 		if (Config.DrawUnitTargetInfo) {

@@ -123,13 +123,13 @@ public class ConstructionManager {
 	    }
 	    */
 	    
-//	    validateWorkersAndBuildings();
+	    validateWorkersAndBuildings();
 	    assignWorkersToUnassignedBuildings();
-//	    checkForStartedConstruction();
+	    checkForStartedConstruction();
 	    constructAssignedBuildings();
-//	    checkForDeadTerranBuilders();
-//	    checkForCompletedBuildings();
-//		checkForDeadlockConstruction();
+	    checkForDeadTerranBuilders();
+	    checkForCompletedBuildings();
+		checkForDeadlockConstruction();
 	}
 
 	/// 건설 진행 도중 (공격을 받아서) 건설하려던 건물이 파괴된 경우, constructionQueue 에서 삭제합니다

@@ -129,7 +129,7 @@ public class ScoutManager {
 				double closestDistance = 1000000000;
 				double tempDistance = 0;
 				BaseLocation closestBaseLocation = null;
-				for (BaseLocation startLocation : BWTA.getStartLocations())
+				for (BaseLocation startLocation : InformationManager.Instance().getStartBaseLocations())
 				{
 					// if we haven't explored it yet (방문했었던 곳은 다시 가볼 필요 없음)
 					if (MyBotModule.Broodwar.isExplored(startLocation.getTilePosition()) == false)
