@@ -64,6 +64,8 @@ public class InformationManager {
 	/// Player - UnitData(각 Unit 과 그 Unit의 UnitInfo 를 Map 형태로 저장하는 자료구조) 를 저장하는 자료구조 객체
 	private Map<Player, UnitData> unitData = new HashMap<Player, UnitData>();
 
+	private ArrayList<BaseLocation> startBaseLocations = new ArrayList<>();
+
 	/// static singleton 객체를 리턴합니다
 	public static InformationManager Instance() {
 		return instance;
@@ -103,7 +105,8 @@ public class InformationManager {
 		secondChokePoint.put(enemyPlayer, null);
 
 		updateChokePointAndExpansionLocation();
-		
+
+		updateStartBaseLocations();
 	}
 
 	/// Unit 및 BaseLocation, ChokePoint 등에 대한 정보를 업데이트합니다
@@ -751,5 +754,15 @@ public class InformationManager {
 		} else {
 			return UnitType.None;
 		}
+	}
+
+	public void updateStartBaseLocations() {
+		for(BaseLocation location : BWTA.getStartLocations()) {
+			startBaseLocations.add(location);
+		}
+	}
+
+	public ArrayList<BaseLocation> getStartBaseLocations() {
+		return startBaseLocations;
 	}
 }
