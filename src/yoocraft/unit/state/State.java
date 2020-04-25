@@ -1,5 +1,7 @@
 package yoocraft.unit.state;
 
+import bwapi.Unit;
+
 public abstract class State {
 
     public enum CurrentState {
@@ -8,7 +10,17 @@ public abstract class State {
         Move,
         Attack,
     }
+
+    public Unit unit;
     public CurrentState currentState = CurrentState.New;
+
+    public Unit getUnit() {
+        return unit;
+    }
+
+    public void setUnit(Unit unit) {
+        this.unit = unit;
+    }
 
     public CurrentState getCurrentState() {
         return currentState;
@@ -17,4 +29,6 @@ public abstract class State {
     public void setCurrentState(CurrentState currentState) {
         this.currentState = currentState;
     }
+
+    abstract public void action();
 }
