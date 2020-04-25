@@ -1,4 +1,5 @@
-package yoocraft;/*
+package yoocraft;
+/*
 +----------------------------------------------------------------------+
 | BasicBot                                                             |
 +----------------------------------------------------------------------+
@@ -37,46 +38,13 @@ import bwapi.Flag.Enum;
 import bwta.BWTA;
 import yoocraft.manager.UXManager;
 
-
-// BasicBot 1.1 Patch Start ////////////////////////////////////////////////
-// MyBotModule 설명 추가
-/// MyBotModule 은 봇프로그램의 기본적인 뼈대 구조를 정의한 class 로서, 스타크래프트 경기 도중 발생하는 이벤트들을 GameCommander class 인스턴스에게 전달합니다.<br>
-///
-/// MyBotModule class는 수정을 하지 말고,<br>
-/// 실제 봇프로그램 개발은 GameCommander class 를 수정하는 형태로 진행하도록 합니다.<br>
-/// @see GameCommander
-///
-/// <br><br>
-/// 알고리즘 경진대회 의 공정하고 효율적인 운영을 위해 Main, MyBotModule, UXManager 파일은 참가자들이 제출하는 소스코드를 무시하고 덮어쓴 후 빌드합니다 <br>
-///
-/// 알고리즘 경진대회 빌드서버가 사용하는 Main, MyBotModule, UXManager 파일을 예시적으로 MyBotModule 에 반영하였습니다 <br>
-/// 실제 알고리즘 경진대회 빌드서버에서는 코드를 일부 수정해서 빌드하게 할 수 있습니다 <br>
-///
-/// 알고리즘 경진대회 빌드서버가 사용하는 Main 은 MyBotModule 을 실행시키는 기능을 수행합니다. <br>
-/// 알고리즘 경진대회 빌드서버가 사용하는 MyBotModule 은 GameCommander 에게 이벤트를 전달하는 기능을 수행하며, 게임 속도 지연 여부 파악, 게임 무승부 상황 파악 등을 통해 게임을 강제 패배시키거나 강제 종료시키는 행동을 수행합니다. <br>
-/// 알고리즘 경진대회 빌드서버가 사용하는 UX Manager 는 알고리즘 경진대회 운영, 사후 판정 등에 필요한 최소한의 내용만 화면에 표시합니다. <br>
-/// 이 파일들은 InformationManager 등 다른 파일들과 Dependency가 없도록 개발되었기 때문에, <br>
-/// 참가자들은 InformationManager 등 다른 파일들을 자유롭게 수정하실 수 있습니다. 
-/// 
-// BasicBot 1.1 Patch End //////////////////////////////////////////////////
 public class MyBotModule extends DefaultBWListener {
 
-	/// BWAPI 에 해당하는 내부 객체
 	private Mirror mirror = new Mirror();
-	
-	/// 스타크래프트 대결 상황 전체에 대한 상황 파악 및 액션 실행을 제공하는 객체  <br>
-	/// C언어에서 BWAPI::Broodwar 에 해당합니다
 	public static Game Broodwar;
-
-	/// 실제 봇프로그램
-	/// @see GameCommander			
 	private GameCommander gameCommander;
 
-	
-	
-	// BasicBot 1.1 Patch Start ////////////////////////////////////////////////
 	// 타임아웃 패배, 자동 패배 체크 관련 변수 및 메소드 선언
-	
 	private boolean isExceptionLostConditionSatisfied = false;	/// Exception 으로 인한 패배 체크 결과
 	private int exceptionLostConditionSatisfiedFrame = 0;		/// Exception 패배 조건이 시작된 프레임 시점
 	private int maxDurationForExceptionLostCondition = 20;		/// Exception 패배 조건이 만족된채 게임을 유지시키는 최대 프레임 수
@@ -99,12 +67,8 @@ public class MyBotModule extends DefaultBWListener {
 	private boolean isToTestTimeOut = false;					///< 타임 아웃 체크 테스트 실행 여부
 	private int timeOverTestDuration = 0;
 	private int timeOverTestFrameCountLimit = 0;
-	private int timeOverTestFrameCount = 0;						///< 타임 아웃 체크 테스트 실행 
+	private int timeOverTestFrameCount = 0;						///< 타임 아웃 체크 테스트 실행
 
-	// BasicBot 1.1 Patch End //////////////////////////////////////////////////
-	
-	
-	
 	public void run() {
 		mirror.getModule().setEventListener(this);
 		mirror.startGame();
@@ -113,24 +77,16 @@ public class MyBotModule extends DefaultBWListener {
 	/// 경기가 시작될 때 일회적으로 발생하는 이벤트를 처리합니다
 	@Override
 	public void onStart() {
-
 		Broodwar = mirror.getGame();
-		
 		gameCommander = new GameCommander();
 
 		if (Broodwar.isReplay()) {
 			return;
 		}
 
-		// BasicBot 1.1 Patch Start ////////////////////////////////////////////////
 		// 타임아웃 패배, 자동 패배 체크 관련 변수 초기화
-
 		initializeLostConditionVariables();
-		
-		// BasicBot 1.1 Patch End //////////////////////////////////////////////////
 
-		// Config 파일 관리가 번거롭고, 배포 및 사용시 Config 파일 위치를 지정해주는 것이 번거롭기 때문에, 
-		// Config 를 파일로부터 읽어들이지 않고, Config 클래스의 값을 사용하도록 한다.
 		if(Config.EnableCompleteMapInformation){
 			Broodwar.enableFlag(Enum.CompleteMapInformation.getValue());
 		}
@@ -149,11 +105,9 @@ public class MyBotModule extends DefaultBWListener {
 		// frameskip을 늘리면 화면 표시도 업데이트 안하므로 훨씬 빠르다
 		Broodwar.setFrameSkip(Config.SetFrameSkip);
 
-		System.out.println("Map analyzing started");
 		BWTA.readMap();
 		BWTA.analyze();
 		BWTA.buildChokeNodes();
-		System.out.println("Map analyzing finished");
 
 		gameCommander.onStart();
 	}
@@ -182,7 +136,6 @@ public class MyBotModule extends DefaultBWListener {
 
 		// BasicBot 1.1 Patch Start ////////////////////////////////////////////////
 		// 타임아웃 패배, 자동 패배 체크 추가
-
 		// timeStartedAtFrame 를 갱신한다
 		if (timeStartedAtFrame[Broodwar.getFrameCount()] == 0) {
 			timeStartedAtFrame[Broodwar.getFrameCount()] = System.currentTimeMillis();
@@ -227,18 +180,8 @@ public class MyBotModule extends DefaultBWListener {
 				}
 			}
 	    }
-		
-		// 화면 출력 및 사용자 입력 처리
-		// 빌드서버에서는 Dependency가 없는 빌드서버 전용 UXManager 를 실행시킵니다
-		UXManager.Instance().update();
-
 		checkLostConditions();
-
-		// BasicBot 1.1 Patch End //////////////////////////////////////////////////
 	}
-
-	// BasicBot 1.1 Patch Start ////////////////////////////////////////////////
-	// 타임아웃 패배, 자동 패배 체크 추가
 
 	/// 유닛(건물/지상유닛/공중유닛)이 Create 될 때 발생하는 이벤트를 처리합니다
 	@Override
@@ -692,8 +635,4 @@ public class MyBotModule extends DefaultBWListener {
 		}
 
 	}
-
-	// BasicBot 1.1 Patch End //////////////////////////////////////////////////
-
-	
 }

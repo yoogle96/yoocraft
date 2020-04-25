@@ -135,7 +135,7 @@ public class GameCommander {
 	/// 유닛(건물/지상유닛/공중유닛)이 Evade 될 때 발생하는 이벤트를 처리합니다<br>
 	/// 유닛이 Destroy 될 때 발생합니다
 	public void onUnitEvade(Unit unit) {
-	}	
+	}
 
 	// BasicBot 1.1 Patch Start ////////////////////////////////////////////////
 	// 일꾼 탄생/파괴 등에 대한 업데이트 로직 버그 수정 : onUnitShow 가 아니라 onUnitComplete 에서 처리하도록 수정
