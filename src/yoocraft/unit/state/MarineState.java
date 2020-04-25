@@ -1,6 +1,6 @@
 package yoocraft.unit.state;
 
-public class MarineState implements State {
+public class MarineState extends State {
 
 
 }

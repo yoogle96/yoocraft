@@ -4,6 +4,7 @@ import bwapi.Player;
 import bwapi.Position;
 import bwapi.Unit;
 import bwapi.UnitType;
+import yoocraft.unit.state.State;
 
 /// 해당 Unit의 ID, UnitType, 소속 Player, HitPoint, lastPosition, completed(건물이 완성된 것인지) 등을 저장해두는 자료구조<br>
 /// 적군 유닛의 경우 아군 시야 내에 있지 않아 invisible 상태가 되었을 때 정보를 조회할수도 없어지고 파악했던 정보도 유실되기 때문에 별도 자료구조가 필요합니다
@@ -17,6 +18,7 @@ public class UnitInfo {
 	private Position lastPosition;
 	private UnitType type;
 	private boolean completed;
+	private State state;
 
 	public UnitInfo()
 	{
@@ -27,6 +29,7 @@ public class UnitInfo {
 		lastPosition = Position.None;
 		type = UnitType.None;
 		completed = false;
+		state = null;
 	}
 
 	public UnitType getType() {
@@ -92,7 +95,19 @@ public class UnitInfo {
 	public void setCompleted(boolean completed) {
 		this.completed = completed;
 	}
-	
+
+	public State getState() {
+		return state;
+	}
+
+	public void setState(State state) {
+		this.state = state;
+	}
+
+	public void setCurrentState(State.CurrentState currentState) {
+		this.state.setCurrentState(currentState);
+	}
+
 	@Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -104,20 +119,4 @@ public class UnitInfo {
 
         return true;
     }
-
-	
-//		const bool operator == (BWAPI::Unit unit) const
-//		{
-//			return unitID == unit->getID();
-//		}
-//
-//		const bool operator == (const UnitInfo & rhs) const
-//		{
-//			return (unitID == rhs.unitID);
-//		}
-//
-//		const bool operator < (const UnitInfo & rhs) const
-//		{
-//			return (unitID < rhs.unitID);
-//		}
-};
+}

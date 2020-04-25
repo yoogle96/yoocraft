@@ -5,6 +5,12 @@ import bwapi.UnitType;
 import yoocraft.MyBotModule;
 import yoocraft.UnitInfo;
 import yoocraft.manager.InformationManager;
+import yoocraft.unit.state.MarineState;
+import yoocraft.unit.state.State;
+
+import java.util.ArrayList;
+
+import static bwapi.UnitType.Terran_Marine;
 
 public class MarineManager {
 
@@ -19,12 +25,20 @@ public class MarineManager {
     }
 
     public void update() {
-        if (informationManager.getUnitData(selfPlayer).getNumCreatedUnits(UnitType.Terran_Marine.toString()) >= 2) {
-            for (UnitInfo unitInfo : InformationManager.Instance().getUnitData(MyBotModule.Broodwar.self()).getUnitInfos(UnitType.Terran_Marine)) {
-                if (InformationManager.Instance().getUnitData(MyBotModule.Broodwar.self()).getNumCreatedUnits(UnitType.Terran_Bunker.toString()) == 1) {
-                    UnitInfo bunkerInfo = InformationManager.Instance().getUnitData(MyBotModule.Broodwar.self()).getBuildingUnitInfos(UnitType.Terran_Bunker).get(0);
-                    unitInfo.getUnit().rightClick(bunkerInfo.getUnit());
-                }
+        ArrayList<UnitInfo> marineList = InformationManager.Instance().getUnitInfos(Terran_Marine, selfPlayer);
+        if(marineList == null) return;
+
+        for(UnitInfo unitInfo : marineList) {
+            State state = unitInfo.getState();
+
+            if(state == null) {
+                unitInfo.setState(new MarineState());
+                continue;
+            }
+
+            State.CurrentState currentState = state.getCurrentState();
+            if(currentState == State.CurrentState.New) {
+                unitInfo.setCurrentState((State.CurrentState.Idle));
             }
         }
     }

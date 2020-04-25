@@ -765,4 +765,8 @@ public class InformationManager {
 	public ArrayList<BaseLocation> getStartBaseLocations() {
 		return startBaseLocations;
 	}
+
+	public  ArrayList<UnitInfo> getUnitInfos(UnitType unitType, Player player) {
+		return unitData.get(player).getUnitInfos(unitType);
+	}
 }
