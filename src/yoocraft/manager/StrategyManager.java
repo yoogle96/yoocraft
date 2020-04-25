@@ -18,10 +18,13 @@ import yoocraft.CommandUtil;
 import yoocraft.Common;
 import yoocraft.MetaType;
 import yoocraft.MyBotModule;
+import yoocraft.UnitInfo;
 import yoocraft.strategy.VSProtoss;
 import yoocraft.strategy.VSRace;
 import yoocraft.strategy.VSTerran;
 import yoocraft.strategy.VSZerg;
+
+import static bwapi.UnitType.Terran_Marine;
 
 
 /// 상황을 판단하여, 정찰, 빌드, 공격, 방어 등을 수행하도록 총괄 지휘를 하는 class <br>
@@ -88,7 +91,7 @@ public class StrategyManager {
 			isInitialBuildOrderFinished = true;
 		}
 		executeSupplyManagement();
-		executeCombat();
+//		executeCombat();
 		vsRace.update();
 		// 이번 게임의 로그를 남깁니다
 		saveGameLog();
@@ -199,73 +202,75 @@ public class StrategyManager {
 		// BasicBot 1.1 Patch End ////////////////////////////////////////////////		
 	}
 
-	public void executeCombat() {
-
-		// 공격 모드가 아닐 때에는 전투유닛들을 아군 진영 길목에 집결시켜서 방어
-		if (isFullScaleAttackStarted == false) {
-			Chokepoint firstChokePoint = BWTA.getNearestChokepoint(InformationManager.Instance().getMainBaseLocation(InformationManager.Instance().selfPlayer).getTilePosition());
-
-			for (Unit unit : MyBotModule.Broodwar.self().getUnits()) {
-				if (unit.getType() == InformationManager.Instance().getBasicCombatUnitType() && unit.isIdle()) {
-					commandUtil.attackMove(unit, firstChokePoint.getCenter());
-				}
-			}
-
-			// 전투 유닛이 2개 이상 생산되었고, 적군 위치가 파악되었으면 총공격 모드로 전환
-			if (MyBotModule.Broodwar.self().completedUnitCount(InformationManager.Instance().getBasicCombatUnitType()) > 2) {
-				if (InformationManager.Instance().enemyPlayer != null
-					&& InformationManager.Instance().enemyRace != Race.Unknown
-					&& InformationManager.Instance().getOccupiedBaseLocations(InformationManager.Instance().enemyPlayer).size() > 0) {
-					isFullScaleAttackStarted = true;
-				}
-			}
-		}
-		// 공격 모드가 되면, 모든 전투유닛들을 적군 Main BaseLocation 로 공격 가도록 합니다
-		else {
-			//std.cout + "enemy OccupiedBaseLocations : " + InformationManager.Instance().getOccupiedBaseLocations(InformationManager.Instance()._enemy).size() + std.endl;
-			
-			if (InformationManager.Instance().enemyPlayer != null
-					&& InformationManager.Instance().enemyRace != Race.Unknown 
-					&& InformationManager.Instance().getOccupiedBaseLocations(InformationManager.Instance().enemyPlayer).size() > 0) 
-			{					
-				// 공격 대상 지역 결정
-				BaseLocation targetBaseLocation = null;
-				double closestDistance = 100000000;
-
-				for (BaseLocation baseLocation : InformationManager.Instance().getOccupiedBaseLocations(InformationManager.Instance().enemyPlayer)) {
-					double distance = BWTA.getGroundDistance(
-						InformationManager.Instance().getMainBaseLocation(InformationManager.Instance().selfPlayer).getTilePosition(), 
-						baseLocation.getTilePosition());
-
-					if (distance < closestDistance) {
-						closestDistance = distance;
-						targetBaseLocation = baseLocation;
-					}
-				}
-
-				if (targetBaseLocation != null) {
-					for (Unit unit : MyBotModule.Broodwar.self().getUnits()) {
-						// 건물은 제외
-						if (unit.getType().isBuilding()) {
-							continue;
-						}
-						// 모든 일꾼은 제외
-						if (unit.getType().isWorker()) {
-							continue;
-						}
-											
-						// canAttack 유닛은 attackMove Command 로 공격을 보냅니다
-						if (unit.canAttack()) {
-							
-							if (unit.isIdle()) {
-								commandUtil.attackMove(unit, targetBaseLocation.getPosition());
-							}
-						} 
-					}
-				}
-			}
-		}
-	}
+//	public void executeCombat() {
+//
+//		// 공격 모드가 아닐 때에는 전투유닛들을 아군 진영 길목에 집결시켜서 방어
+//		if (isFullScaleAttackStarted == false) {
+//			Chokepoint firstChokePoint = BWTA.getNearestChokepoint(InformationManager.Instance().getMainBaseLocation(InformationManager.Instance().selfPlayer).getTilePosition());
+//
+//			for (Unit unit : MyBotModule.Broodwar.self().getUnits()) {
+//				if (unit.getType() == InformationManager.Instance().getBasicCombatUnitType() && unit.isIdle()) {
+//					commandUtil.attackMove(unit, firstChokePoint.getCenter());
+//				}
+//			}
+//
+//			// 전투 유닛이 2개 이상 생산되었고, 적군 위치가 파악되었으면 총공격 모드로 전환
+//			if (MyBotModule.Broodwar.self().completedUnitCount(InformationManager.Instance().getBasicCombatUnitType()) > 2) {
+//				if (InformationManager.Instance().enemyPlayer != null
+//					&& InformationManager.Instance().enemyRace != Race.Unknown
+//					&& InformationManager.Instance().getOccupiedBaseLocations(InformationManager.Instance().enemyPlayer).size() > 0) {
+//					isFullScaleAttackStarted = true;
+//				}
+//			}
+//		}
+//		// 공격 모드가 되면, 모든 전투유닛들을 적군 Main BaseLocation 로 공격 가도록 합니다
+//		else {
+//			//std.cout + "enemy OccupiedBaseLocations : " + InformationManager.Instance().getOccupiedBaseLocations(InformationManager.Instance()._enemy).size() + std.endl;
+//
+//			if (InformationManager.Instance().enemyPlayer != null
+//					&& InformationManager.Instance().enemyRace != Race.Unknown
+//					&& InformationManager.Instance().getOccupiedBaseLocations(InformationManager.Instance().enemyPlayer).size() > 0)
+//			{
+//				// 공격 대상 지역 결정
+//				BaseLocation targetBaseLocation = null;
+//				double closestDistance = 100000000;
+//
+//				for (BaseLocation baseLocation : InformationManager.Instance().getOccupiedBaseLocations(InformationManager.Instance().enemyPlayer)) {
+//					double distance = BWTA.getGroundDistance(
+//						InformationManager.Instance().getMainBaseLocation(InformationManager.Instance().selfPlayer).getTilePosition(),
+//						baseLocation.getTilePosition());
+//
+//					if (distance < closestDistance) {
+//						closestDistance = distance;
+//						targetBaseLocation = baseLocation;
+//					}
+//				}
+//			BaseLocation targetBaseLocation = InformationManager.Instance().getMainBaseLocation(InformationManager.Instance().enemyPlayer);
+//
+//				if (targetBaseLocation != null) {
+//					ArrayList<UnitInfo> marineList = InformationManager.Instance().getUnitInfos(Terran_Marine, InformationManager.Instance().selfPlayer);
+//					for (UnitInfo unit : marineList) {
+////						// 건물은 제외
+////						if (unit.getType().isBuilding()) {
+////							continue;
+////						}
+////						// 모든 일꾼은 제외
+////						if (unit.getType().isWorker()) {
+////							continue;
+////						}
+//
+//						// canAttack 유닛은 attackMove Command 로 공격을 보냅니다
+//						if (unit.getUnit().canAttack()) {
+//
+//							if (unit.getUnit().isIdle()) {
+//								commandUtil.attackMove(unit.getUnit(), targetBaseLocation.getPosition());
+//							}
+//						}
+//					}
+//				}
+////			}
+//		}
+//	}
 	
 	// BasicBot 1.1 Patch Start ////////////////////////////////////////////////
 	// 경기 결과 파일 Save / Load 및 로그파일 Save 예제 추가

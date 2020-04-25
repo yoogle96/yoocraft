@@ -40,6 +40,10 @@ public class MarineManager {
             if(currentState == State.CurrentState.New) {
                 unitInfo.setCurrentState((State.CurrentState.Idle));
             }
+
+            if(currentState == State.CurrentState.Idle) {
+                unitInfo.action();
+            }
         }
     }
 }

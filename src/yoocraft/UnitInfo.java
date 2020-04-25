@@ -108,6 +108,15 @@ public class UnitInfo {
 		this.state.setCurrentState(currentState);
 	}
 
+	public void setStateUnit(Unit unit) {
+		state.setUnit(unit);
+	}
+
+
+	public void action() {
+		state.action();
+	}
+
 	@Override
     public boolean equals(Object o) {
         if (this == o) return true;

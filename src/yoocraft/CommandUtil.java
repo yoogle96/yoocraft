@@ -7,8 +7,15 @@ import bwapi.UnitCommandType;
 import bwapi.UnitType;
 import bwapi.UpgradeType;
 import bwapi.WeaponType;
+import yoocraft.unit.manager.MarineManager;
 
 public class CommandUtil {
+
+	private static CommandUtil instance = new CommandUtil();
+
+	public static CommandUtil Instance() {
+		return instance;
+	}
 
 	public void attackUnit(Unit attacker, Unit target)
 	{

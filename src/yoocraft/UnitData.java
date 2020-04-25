@@ -71,6 +71,9 @@ public class UnitData {
 
 		UnitInfo ui = unitAndUnitInfoMap.get(unit.getID());
 		ui.setUnit(unit);
+		if(ui.getType() == UnitType.Terran_Marine) {
+			ui.setStateUnit(unit);
+		}
 		ui.setPlayer(unit.getPlayer());
 		ui.setLastPosition(unit.getPosition());
 		ui.setLastHealth(unit.getHitPoints());
@@ -81,6 +84,7 @@ public class UnitData {
 		
 		if (firstSeen)
 		{
+
 			if(!numCreatedUnits.containsKey(unit.getType().toString())){
 				numCreatedUnits.put(unit.getType().toString(), 1);
 			}else{
