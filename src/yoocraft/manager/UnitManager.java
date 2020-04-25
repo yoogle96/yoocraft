@@ -1,6 +1,6 @@
 package yoocraft.manager;
 
-import yoocraft.manager.unit.MarineManager;
+import yoocraft.unit.manager.MarineManager;
 
 public class UnitManager {
 
