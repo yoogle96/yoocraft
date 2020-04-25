@@ -87,7 +87,6 @@ public class StrategyManager {
 		if (BuildManager.Instance().buildQueue.isEmpty()) {
 			isInitialBuildOrderFinished = true;
 		}
-		executeWorkerTraining();
 		executeSupplyManagement();
 		executeCombat();
 		vsRace.update();
@@ -108,58 +107,6 @@ public class StrategyManager {
 		vsRace.initBuild();
 	}
 
-	// 일꾼 계속 추가 생산
-	public void executeWorkerTraining() {
-
-		// InitialBuildOrder 진행중에는 아무것도 하지 않습니다
-		if (isInitialBuildOrderFinished == false) {
-			return;
-		}
-
-		if (MyBotModule.Broodwar.self().minerals() >= 50) {
-			// workerCount = 현재 일꾼 수 + 생산중인 일꾼 수
-			int workerCount = MyBotModule.Broodwar.self().allUnitCount(InformationManager.Instance().getWorkerType());
-
-			if (MyBotModule.Broodwar.self().getRace() == Race.Zerg) {
-				for (Unit unit : MyBotModule.Broodwar.self().getUnits()) {
-					if (unit.getType() == UnitType.Zerg_Egg) {
-						// Zerg_Egg 에게 morph 명령을 내리면 isMorphing = true,
-						// isBeingConstructed = true, isConstructing = true 가 된다
-						// Zerg_Egg 가 다른 유닛으로 바뀌면서 새로 만들어진 유닛은 잠시
-						// isBeingConstructed = true, isConstructing = true 가
-						// 되었다가,
-						if (unit.isMorphing() && unit.getBuildType() == UnitType.Zerg_Drone) {
-							workerCount++;
-						}
-					}
-				}
-			} else {
-				for (Unit unit : MyBotModule.Broodwar.self().getUnits()) {
-					if (unit.getType().isResourceDepot()) {
-						if (unit.isTraining()) {
-							workerCount += unit.getTrainingQueue().size();
-						}
-					}
-				}
-			}
-
-			if (workerCount < 30) {
-				for (Unit unit : MyBotModule.Broodwar.self().getUnits()) {
-					if (unit.getType().isResourceDepot()) {
-						if (unit.isTraining() == false || unit.getLarva().size() > 0) {
-							// 빌드큐에 일꾼 생산이 1개는 있도록 한다
-							if (BuildManager.Instance().buildQueue
-									.getItemCount(InformationManager.Instance().getWorkerType(), null) == 0) {
-								// std.cout + "worker enqueue" + std.endl;
-								BuildManager.Instance().buildQueue.queueAsLowestPriority(
-										new MetaType(InformationManager.Instance().getWorkerType()), false);
-							}
-						}
-					}
-				}
-			}
-		}
-	}
 
 	// Supply DeadLock 예방 및 SupplyProvider 가 부족해질 상황 에 대한 선제적 대응으로서<br>
 	// SupplyProvider를 추가 건설/생산한다
