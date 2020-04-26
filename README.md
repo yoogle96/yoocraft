@@ -5,11 +5,13 @@
 ![main img](doc/img/main.png)
 
 ## Description
+yoocraft is a StarCraft: Broodwar AI Bot written in Java
 
 ## Environment
 
 - Java JDK 1.8
-- BWAPI 4.1.2
+- BWAPI 4.1.2(BWMirror)
+- BWTA
 - IntelliJ
 
 ## TODO
