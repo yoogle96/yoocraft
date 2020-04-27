@@ -1,6 +1,7 @@
 package yoocraft.manager;
 
 import yoocraft.unit.manager.MarineManager;
+import yoocraft.unit.manager.ScvManager;
 
 public class UnitManager {
 
@@ -12,5 +13,6 @@ public class UnitManager {
 
     public void update() {
         MarineManager.Instance().update();
+        ScvManager.Instance().update();
     }
 }
