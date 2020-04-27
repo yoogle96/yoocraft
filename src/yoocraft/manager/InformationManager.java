@@ -774,13 +774,14 @@ public class InformationManager {
 		return startBaseLocations;
 	}
 
-	BaseLocation getNearestBaseLocation(Position pos) {
+	public BaseLocation getNearestBaseLocation(Position pos) {
 		BaseLocation nearestBaseLocation = null;
 
 		double dist = 100000;
+		nearestBaseLocation = allBaseLocations.get(0);
 
 		for(BaseLocation baseLocation : allBaseLocations) {
-			double tmpDistance = BWTA.getGroundDistance(pos.toTilePosition(), baseLocation.getTilePosition());
+			double tmpDistance = BWTA.getGroundDistance2(pos.toTilePosition(), baseLocation.getTilePosition());
 
 			if(dist > tmpDistance && dist >= 0) {
 				dist = tmpDistance;

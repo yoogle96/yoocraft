@@ -4,7 +4,9 @@ import bwapi.Player;
 import bwapi.Position;
 import bwapi.TilePosition;
 import bwapi.Unit;
+import bwapi.UnitType;
 import yoocraft.manager.*;
+import yoocraft.unit.manager.ScvManager;
 
 /// 실제 봇프로그램의 본체가 되는 class<br>
 /// 스타크래프트 경기 도중 발생하는 이벤트들이 적절하게 처리되도록 해당 Manager 객체에게 이벤트를 전달하는 관리자 Controller 역할을 합니다
@@ -53,7 +55,7 @@ public class GameCommander {
 
 		// economy and base managers
 		// 일꾼 유닛에 대한 명령 (자원 채취, 이동 정도) 지시 및 정리
-		WorkerManager.Instance().update();
+//		WorkerManager.Instance().update();
 
 		if ( isToFindError) System.out.print("d");
 
@@ -85,6 +87,12 @@ public class GameCommander {
 	/// 유닛(건물/지상유닛/공중유닛)이 Create 될 때 발생하는 이벤트를 처리합니다
 	public void onUnitCreate(Unit unit) { 
 		InformationManager.Instance().onUnitCreate(unit);
+
+		if(unit.getPlayer() == InformationManager.Instance().selfPlayer && unit != null) {
+			if(unit.getType() == UnitType.Terran_Command_Center) {
+				ScvManager.Instance().onUnitComplete(unit);
+			}
+		}
 	}
 
 	///  유닛(건물/지상유닛/공중유닛)이 Destroy 될 때 발생하는 이벤트를 처리합니다

@@ -112,10 +112,18 @@ public class CommandUtil {
 		UnitCommand currentCommand = unit.getLastCommand();
 
 		// if we've already told this unit to move to this position, ignore this command
-		if ((currentCommand.getUnitCommandType() == UnitCommandType.Right_Click_Unit) && (target.getPosition().equals(currentCommand.getTargetPosition())))
-		{
+		if ((currentCommand.getUnitCommandType() == UnitCommandType.Right_Click_Unit) || currentCommand.getTarget() == target) {
 			return;
 		}
+
+		if(currentCommand.getUnitCommandType() == UnitCommandType.Right_Click_Position || currentCommand.getTarget() == target) {
+			return;
+		}
+
+		MyBotModule.Broodwar.printf("yoolge Excute !!");
+		MyBotModule.Broodwar.printf(currentCommand.getUnitCommandType().toString());
+		MyBotModule.Broodwar.printf(currentCommand.getTarget().toString());
+
 
 		// if nothing prevents it, attack the target
 		unit.rightClick(target);

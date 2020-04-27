@@ -9,9 +9,12 @@ public abstract class State {
         Idle,
         Move,
         Attack,
+        Minerals,
+        Gas,
     }
 
     public Unit unit;
+    public Unit target;
     public CurrentState currentState = CurrentState.New;
 
     public Unit getUnit() {
@@ -28,6 +31,14 @@ public abstract class State {
 
     public void setCurrentState(CurrentState currentState) {
         this.currentState = currentState;
+    }
+
+    public Unit getTarget() {
+        return target;
+    }
+
+    public void setTarget(Unit target) {
+        this.target = target;
     }
 
     abstract public void action();
