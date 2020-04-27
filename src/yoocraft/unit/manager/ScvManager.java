@@ -5,6 +5,8 @@ import bwapi.UnitType;
 import yoocraft.MyBotModule;
 import yoocraft.UnitInfo;
 import yoocraft.manager.InformationManager;
+import yoocraft.unit.state.ScvState;
+import yoocraft.unit.state.State;
 
 import java.util.ArrayList;
 
@@ -20,16 +22,18 @@ public class ScvManager {
 
     public void update() {
         ArrayList<UnitInfo> scvList = InformationManager.Instance().getUnitInfos(UnitType.Terran_SCV, selfPlayer);
-        if(MyBotModule.Broodwar.getFrameCount() > 24) {
-            return;
-        }
         if(scvList == null) {
             return;
         }
 
         for(UnitInfo unitInfo : scvList) {
-            MyBotModule.Broodwar.printf(unitInfo.getType().toString() + " : " + unitInfo.getUnitID());
-            // TODO : action
+            State state = unitInfo.getState();
+
+            if(state == null) {
+                unitInfo.setState(new ScvState());
+                unitInfo.setUnit(unitInfo.getUnit());
+                continue;
+            }
         }
     }
 }

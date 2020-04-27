@@ -33,6 +33,7 @@ public class MarineManager {
 
             if(state == null) {
                 unitInfo.setState(new MarineState());
+                unitInfo.setUnit(unitInfo.getUnit());
                 continue;
             }
 
