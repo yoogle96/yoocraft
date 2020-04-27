@@ -774,6 +774,23 @@ public class InformationManager {
 		return startBaseLocations;
 	}
 
+	BaseLocation getNearestBaseLocation(Position pos) {
+		BaseLocation nearestBaseLocation = null;
+
+		double dist = 100000;
+
+		for(BaseLocation baseLocation : allBaseLocations) {
+			double tmpDistance = BWTA.getGroundDistance(pos.toTilePosition(), baseLocation.getTilePosition());
+
+			if(dist > tmpDistance && dist >= 0) {
+				dist = tmpDistance;
+				nearestBaseLocation = baseLocation;
+			}
+		}
+
+		return nearestBaseLocation;
+	}
+
 	public  ArrayList<UnitInfo> getUnitInfos(UnitType unitType, Player player) {
 		return unitData.get(player).getUnitInfos(unitType);
 	}
