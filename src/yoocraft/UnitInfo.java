@@ -112,6 +112,9 @@ public class UnitInfo {
 		state.setUnit(unit);
 	}
 
+	public void setTarget(Unit unit) {
+		state.setTarget(unit);
+	}
 
 	public void action() {
 		state.action();
