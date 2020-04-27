@@ -65,6 +65,7 @@ public class InformationManager {
 	private Map<Player, UnitData> unitData = new HashMap<Player, UnitData>();
 
 	private ArrayList<BaseLocation> startBaseLocations = new ArrayList<>();
+	private ArrayList<BaseLocation> allBaseLocations = new ArrayList<>();
 
 	/// static singleton 객체를 리턴합니다
 	public static InformationManager Instance() {
@@ -107,6 +108,7 @@ public class InformationManager {
 		updateChokePointAndExpansionLocation();
 
 		updateStartBaseLocations();
+		updateAllBaseLocations();
 	}
 
 	/// Unit 및 BaseLocation, ChokePoint 등에 대한 정보를 업데이트합니다
@@ -762,11 +764,21 @@ public class InformationManager {
 		}
 	}
 
+	public void updateAllBaseLocations() {
+		for(BaseLocation location : BWTA.getBaseLocations()) {
+			allBaseLocations.add(location);
+		}
+	}
+
 	public ArrayList<BaseLocation> getStartBaseLocations() {
 		return startBaseLocations;
 	}
 
 	public  ArrayList<UnitInfo> getUnitInfos(UnitType unitType, Player player) {
 		return unitData.get(player).getUnitInfos(unitType);
+	}
+
+	public ArrayList<UnitInfo> getBuildInfos(UnitType unitType, Player player) {
+		return unitData.get(player).getBuildingUnitInfos(unitType);
 	}
 }
